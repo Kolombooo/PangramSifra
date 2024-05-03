@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h1>Pangram šifra</h1>
+    <p id="pangram">The Quick Brown Fox Jumps Over The Lazy Dog</p>
+    <hr>
+    <textarea type="text" name="eninput" id="eninput" placeholder="Input k zašifrování"></textarea>
+    <p id="enoutput">fdf</p>
+    <button onclick="encrypt()">Encrypt</button>
+    <script>
+        function encrypt() {
+            let input = document.getElementById("eninput").value.toLowerCase();
+            var pangram = document.getElementById("pangram").innerText.toLowerCase();
+            pangram = pangram.replace(/\s/g, '');
+            var pangramArray = pangram.split("");
+            input = input.replace(/\s/g, '');
+            var inputArray = input.split("");
+            var resultArray = [];
+            let i = 0;
+            while (i < inputArray.length) {
+                let object = inputArray[i].toString();
+                let sibling;
+                let j = 0;
+                while (j < pangramArray.length) {
+                    if (pangramArray[j] === object) {
+                        sibling = pangramArray[j + 1];
+                    }
+                    j++;
+                }
+                console.log(inputArray[i] + "=>" + sibling);
+                resultArray.push(sibling);
+                i++;
+            }
+            let k = 0;
+            while (k < resultArray.length) {
+                console.log(resultArray[k]);
+                k++;
+            }
+
+            document.getElementById("enoutput").innerText = resultArray.join().replace(/,/g,"");
+        }
+    </script>
+</body>
+</html>
